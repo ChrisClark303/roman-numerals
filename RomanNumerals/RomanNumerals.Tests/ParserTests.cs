@@ -4,6 +4,8 @@ namespace RomanNumerals.Tests
 {
     public class ParserTests
     {
+        //"Rules" are taken from https://www.classace.io/learn/math/3rdgrade/roman-numerals-ivxlcdm
+
         [TestCase("I", 1)]
         [TestCase("V", 5)]
         [TestCase("X", 10)]
@@ -19,6 +21,7 @@ namespace RomanNumerals.Tests
             Assert.AreEqual(expected, number);
         }
 
+        // Rule 1: When a smaller symbol is after a greater symbol, it's added.
         [TestCase("II", 2)]
         [TestCase("VI", 6)]
         [TestCase("XI", 11)]
@@ -34,6 +37,7 @@ namespace RomanNumerals.Tests
             Assert.AreEqual(expected, number);
         }
 
+        //Rule 3: When a smaller symbol appears before a greater symbol, it is subtracted.
         [TestCase("IV", 4)]
         [TestCase("IX", 9)]
         [TestCase("XL", 40)]
@@ -49,6 +53,7 @@ namespace RomanNumerals.Tests
             Assert.AreEqual(expected, number);
         }
 
+        //Rule 2: If a symbol comes after itself, it's added.
         [TestCase("XXX", 30)]
         [TestCase("CCC", 300)]
         [TestCase("MMM", 3000)]

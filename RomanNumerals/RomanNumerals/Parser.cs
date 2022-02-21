@@ -21,12 +21,16 @@
             return number;
         }
 
+        //First iteration: simply convert the numeral to its specified value
         private int ConvertSingleNumeral(string numerals)
         {
             var numeral = numerals[0];
             return ConvertToNumber(numeral);
         }
 
+        //Second iteration: if there are only two numerals, then it's either an addition or 
+        //subtraction, depending on whether it's in ascending or descending order of value. 
+        //If the value is the same, it's an addition.
         private int ConvertDoubleNumeral(string numerals)
         {
             var numeral1 = ConvertToNumber(numerals.First());
@@ -40,6 +44,11 @@
             return numeral1 + numeral2;
         }
 
+        //Third iteration: calculates numerals of any number of digits, checking ahead to see if the next numeral needs to be added or subtracted 
+        //In order to avoid having to calculate parts of the string ahead of others, subtractions are performed one digit to the left, eg:
+        //19 = 10 - 1 + 10 (X - I + X), rather than 10 + (10 - 1) / X + (X - I)
+        //Otherwise the operation would be to resolve IX to 9 prior to adding it to the first X, and I wasn't keen on having to model 
+        //the order of precedence.
         private int ConvertMultipleNumerals(string numerals)
         {
             var numbers = numerals.Select(x => ConvertToNumber(x)).ToArray();
@@ -48,15 +57,13 @@
             for (var i = 0; i < numbers.Length; i++)
             {
                 int number = numbers[i];
+                var nextIsHigher = NextNumberIsHigherValue(numbers, i, number);
                 var op = new Operation()
                 {
                     Operand = number,
-                    Operator = Operator.Add
+                    Operator = nextIsHigher ? Operator.Subtract : Operator.Add
                 };
-                if (NextNumberIsHigherValue(numbers, i, number))
-                {
-                    op.Operator = Operator.Subtract;
-                }
+
                 operations.Add(op);
             }
 
