@@ -91,8 +91,15 @@
 
         private int ConvertToNumber(char letter)
         {
-            var numeral = Enum.Parse<Numerals>(letter.ToString());
-            return (int)numeral;
+            try
+            {
+                var numeral = Enum.Parse<Numerals>(letter.ToString());
+                return (int)numeral;
+            }
+            catch (ArgumentException)
+            {
+                throw new ArgumentException("Error parsing values as a roman numeral", letter.ToString());
+            }
         }
     }
 }
