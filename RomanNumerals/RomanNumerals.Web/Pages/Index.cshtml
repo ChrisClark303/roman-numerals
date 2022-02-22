@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Enter your roman numerals and press Parse to see what number they represent.</p>
+    <p>Learn more about <a href="https://www.classace.io/learn/math/3rdgrade/roman-numerals-ivxlcdm">Roman Numerals here</a>.</p>
+    
+    <p>
+        <input type="text" id="romanNumerals" /> <button id="parse">Parse</button>
+    </p>
+    <p>
+        <label class="error" id="error"></label>
+    </p>
+
+    <p>
+        <label class="result" id="result"></label>
+    </p>
+</div>

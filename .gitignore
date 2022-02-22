@@ -5,3 +5,7 @@
 /RomanNumerals/.vs/RomanNumerals
 bin/
 obj/
+/RomanNumerals/RomanNumerals.Api/.config
+/RomanNumerals/RomanNumerals.Api/Properties
+/RomanNumerals/RomanNumerals.Web/.config
+/RomanNumerals/RomanNumerals.Web/Properties
